@@ -41,6 +41,7 @@ class Alphabits:
         checks the user input to see if they've entered the correct character. if she hasn't, ask for input again, and if she has, add the character to the end of the user_alphabet list and start the next turn.
         Arguments: none
         '''
+        print("# to exit.")
         char_to_add = input("what's the next letter? >").lower()
         index_to_check = self.list_length()
 
@@ -53,6 +54,9 @@ class Alphabits:
             # this character will print the current user list.
             self.return_list()
             self.add_char()
+        elif char_to_add == "#":
+            print("Goodbye!")
+            exit()
         elif char_to_add not in self.alphabet_to_check_against:
             print("NOPE! Please type a letter!")
             self.add_char()
