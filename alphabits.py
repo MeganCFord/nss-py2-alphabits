@@ -31,7 +31,7 @@ class Alphabits:
 
     def return_list(self):
         '''
-        prints the current list of correctly entered letters as a string joined from user_alphabet. runs inside add_char.
+        prints the current list of correctly entered letters as a string joined from user_alphabet. runs inside add_char if the '?' character is typed.
         Arguments: none
         '''
         print("you've gotten as far as " + ", ".join(self.user_alphabet) + "...")
@@ -48,25 +48,24 @@ class Alphabits:
 
         if len(char_to_add) > 1:
             print("NOPE! Please type just one letter!")
-            self.return_list()
             self.add_char()
-        elif char_to_add == '4':
-            print("SURPRISE!!!!!!!")
+        elif char_to_add == '?':
+            # this character will print the current user list.
             self.return_list()
             self.add_char()
         elif char_to_add not in self.alphabet_to_check_against:
             print("NOPE! Please type a letter!")
-            self.return_list()
             self.add_char()
             # here is where the correctness of the character is checked, by comparing the length of the current alphabet to the index of the entered character.
-        elif self.alphabet_to_check_against.index(char_to_add) != index_to_check:
-            print("NOPE! Wrong letter!")
-            self.return_list()
+        elif self.alphabet_to_check_against.index(char_to_add) > index_to_check:
+            print("NOPE! Wrong letter! you've guessed too far forward in the alphabet.")
+            self.add_char()
+        elif self.alphabet_to_check_against.index(char_to_add) < index_to_check:
+            print("NOPE! Duplicate letter!")
             self.add_char()
         else:
             print("YEP! Good job!")
             self.user_alphabet.append(char_to_add)
-            self.return_list()
             self.start_turn()
 
     def list_length(self):
@@ -80,4 +79,3 @@ if __name__ == '__main__':
     app = Alphabits()
     app.print_intro()
     app.start_turn()
-
